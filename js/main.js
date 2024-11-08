@@ -117,6 +117,10 @@ class Main {
         dataBus.actors.forEach(actor => {
             actor.update();
             actor.render();
+            // 敌人攻击逻辑
+            if (actor.constructor.name === 'Enemy2' || actor.constructor.name === 'Enemy3') {
+                actor.attack();
+            }
         });
 
         // 敌人生成逻辑
@@ -140,7 +144,6 @@ class Main {
 
             // 检查新生成的敌人与现有敌人的距离，防止堆叠
             if (newEnemy) {
-              
                 let isValidPosition = true;
                 dataBus.actors.forEach(actor => {
                     const isSameInstance = actor === newEnemy;
@@ -160,7 +163,6 @@ class Main {
                         if (!noCollisionX && !noCollisionY) {
                             isValidPosition = false;
                             console.log('invalid position');
-                            
                         }
                     }
                 });
@@ -171,7 +173,5 @@ class Main {
             }
         }
     }
-
-   
 }
 new Main();

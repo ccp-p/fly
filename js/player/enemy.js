@@ -1,4 +1,5 @@
 import DataBus from '../dataBus.js';
+import Bullet from './bullet.js';
 const dataBus = new DataBus();
 
 export default class Enemy {
@@ -12,6 +13,7 @@ export default class Enemy {
         this.isAlive = true;
         this.speed = 2;
         this.zIndex = 2;
+        this.health = 3; // 添加生命值属性
         dataBus.addActor(this);
     }
     destroy(){
@@ -28,20 +30,16 @@ export default class Enemy {
         if (this.y > dataBus.canvas.height) {
             this.isAlive = false;
         }
-
-        // 碰撞检测逻辑
-        dataBus.actors.forEach(actor => {
-            if (actor.constructor.name === 'Bullet' && actor.isAlive) {
-                if (this.x < actor.x + actor.width &&
-                    this.x + this.width > actor.x &&
-                    this.y < actor.y + actor.height &&
-                    this.y + this.height > actor.y) {
-                    // 碰撞发生
-                    this.playDestoryAni();
-                    actor.isAlive = false;
-                }
-            }
-        });
+    }
+    attack() {
+        // 敌人攻击逻辑
+        if (Math.random() < .01) { // 1% 概率进行攻击
+            const bulletX = this.x + this.width / 2 - 2.5;
+            const bulletY = this.y + this.height;
+            const bulletSpeed = -10; // 子弹向下移动
+            
+            const bullet = new Bullet(bulletX, bulletY, bulletSpeed);
+        }
     }
     playDestoryAni(){
         this.destoryAniIndex = 0;
@@ -53,7 +51,6 @@ export default class Enemy {
                 this.isAlive = false;
             }
         },100);
-        
     }
 
     render() {
