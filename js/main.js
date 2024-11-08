@@ -147,8 +147,6 @@ class Main {
                 let isValidPosition = true;
                 dataBus.actors.forEach(actor => {
                     const isSameInstance = actor === newEnemy;
-                    const minDistanceX = actor.width + newEnemy.width;
-                    const minDistanceY = actor.height + newEnemy.height;
                     if (actor.constructor.name.startsWith('Enemy') && !isSameInstance) {
                         const actorRect = {
                             width: actor.width,

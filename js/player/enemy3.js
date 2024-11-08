@@ -23,8 +23,7 @@ export default class Enemy3 extends Enemy {
 
     update() {
         super.update();
-        this.flyCount++;
-        this.flyAni && this.flyAni();
+        this.flyAni();
         this.attack();
     }
 }

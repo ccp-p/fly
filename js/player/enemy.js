@@ -38,7 +38,7 @@ export default class Enemy {
             const bulletY = this.y + this.height;
             const bulletSpeed = -10; // 子弹向下移动
             
-            const bullet = new Bullet(bulletX, bulletY, bulletSpeed);
+            const bullet = new Bullet(bulletX, bulletY, bulletSpeed,2);
         }
     }
     playDestoryAni(){
