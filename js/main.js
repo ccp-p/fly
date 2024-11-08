@@ -3,7 +3,9 @@ import Background from './runtime/background.js';
 const dataBus = new DataBus();
 import ResourceLoader from './base/resourceLoader.js';
 import Plane from './player/plane.js';
-import Enemy from './player/enemy.js'; // 新增导入
+import Enemy1 from './player/enemy1.js'; // 新增导入
+import Enemy2 from './player/enemy2.js'; // 新增导入
+import Enemy3 from './player/enemy3.js'; // 新增导入
 
 let lastTime = 0;
 const fps = 30; // Desired frames per second
@@ -35,6 +37,10 @@ class Main {
     }
     bindEvnet(){
     //   press up down left right plane move
+    //    持续手指移动 而移动
+    
+  
+
         window.addEventListener('keydown', (e) => {
         console.log('keydown', e.key);
         
@@ -99,7 +105,9 @@ class Main {
         this.enemyCount++;
         if (this.enemyCount >= this.enemyInterval) {
             this.enemyCount = 0;
-            new Enemy(); // 生成新的敌人
+            // new Enemy1(); // 生成新的敌人
+            // new Enemy2(); // 生成新的敌人
+            new Enemy3(); // 生成新的敌人
         }
     }
 }

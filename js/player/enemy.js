@@ -2,8 +2,8 @@ import DataBus from '../dataBus.js';
 const dataBus = new DataBus();
 
 export default class Enemy {
-    constructor() {
-        this.image = dataBus.resources['enemy1.png'];
+    constructor(image) {
+        this.image = image
         this.width = this.image.img.naturalWidth;
         this.height = this.image.img.naturalHeight;
         this.x = Math.random() * (dataBus.canvas.width - this.width);
@@ -29,11 +29,23 @@ export default class Enemy {
                     this.y < actor.y + actor.height &&
                     this.y + this.height > actor.y) {
                     // 碰撞发生
-                    this.isAlive = false;
+                    this.playDestoryAni();
                     actor.isAlive = false;
                 }
             }
         });
+    }
+    playDestoryAni(){
+        this.destoryAniIndex = 0;
+        this.destoryAniTimer = setInterval(()=>{
+            this.image = this.destoryAniArr[this.destoryAniIndex];
+            this.destoryAniIndex++;
+            if(this.destoryAniIndex > this.destoryAniArr.length){
+                clearInterval(this.destoryAniTimer);
+                this.isAlive = false;
+            }
+        },100);
+        
     }
 
     render() {
