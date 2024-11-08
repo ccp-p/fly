@@ -81,7 +81,6 @@ export default class Plane {
             const bulletY = this.y;
             const bulletSpeed = 10; // 子弹速度
             const bullet = new Bullet(bulletX, bulletY, bulletSpeed);
-            this.bullets.push(bullet);
             this.fireCount = 0; // 重置发射计数器
         }
     }

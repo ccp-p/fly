@@ -18,8 +18,10 @@ export default class Bullet {
         this.y -= this.speed; // 子弹向上移动
         if (this.y < 0) {
             this.isAlive = false; // 子弹超出屏幕时设置为不存活
+            
         }
     }
+  
 
     render() {
         if (this.isAlive) {

@@ -20,6 +20,20 @@ export default class Enemy {
         if (this.y > dataBus.canvas.height) {
             this.isAlive = false;
         }
+
+        // 碰撞检测逻辑
+        dataBus.actors.forEach(actor => {
+            if (actor.constructor.name === 'Bullet' && actor.isAlive) {
+                if (this.x < actor.x + actor.width &&
+                    this.x + this.width > actor.x &&
+                    this.y < actor.y + actor.height &&
+                    this.y + this.height > actor.y) {
+                    // 碰撞发生
+                    this.isAlive = false;
+                    actor.isAlive = false;
+                }
+            }
+        });
     }
 
     render() {
