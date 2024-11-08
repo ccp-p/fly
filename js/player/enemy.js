@@ -14,7 +14,9 @@ export default class Enemy {
         this.zIndex = 2;
         dataBus.addActor(this);
     }
-
+    destroy(){
+        this.isAlive = false;
+    }
     update() {
         this.y += this.speed;
         if (this.y > dataBus.canvas.height) {

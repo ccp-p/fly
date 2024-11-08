@@ -67,8 +67,26 @@ class Main {
                 break
         }
     }
-    )
+    );
 
+    // 添加触摸事件监听器
+    this.canvas.addEventListener('touchstart', (e) => {
+        this.handleTouchMove(e);
+    });
+
+    this.canvas.addEventListener('touchmove', (e) => {
+        this.handleTouchMove(e);
+    });
+    }
+
+    handleTouchMove(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const rect = this.canvas.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        this.plane.x = x - this.plane.width / 2;
+        this.plane.y = y - this.plane.height / 2;
     }
 
     loop(currentTime) {
@@ -107,8 +125,22 @@ class Main {
             this.enemyCount = 0;
             // new Enemy1(); // 生成新的敌人
             // new Enemy2(); // 生成新的敌人
-            new Enemy3(); // 生成新的敌人
+            switch (Math.floor(Math.random() * 3)) {
+                case 0:
+                    new Enemy1();
+                    break;
+                case 1:
+                    new Enemy2();
+                    break;
+                case 2:
+                    new Enemy3();
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
+   
 }
 new Main();
