@@ -123,20 +123,51 @@ class Main {
         this.enemyCount++;
         if (this.enemyCount >= this.enemyInterval) {
             this.enemyCount = 0;
-            // new Enemy1(); // 生成新的敌人
-            // new Enemy2(); // 生成新的敌人
+            let newEnemy;
             switch (Math.floor(Math.random() * 3)) {
                 case 0:
-                    new Enemy1();
+                    newEnemy = new Enemy1();
                     break;
                 case 1:
-                    new Enemy2();
+                    newEnemy = new Enemy2();
                     break;
                 case 2:
-                    new Enemy3();
+                    newEnemy = new Enemy3();
                     break;
                 default:
                     break;
+            }
+
+            // 检查新生成的敌人与现有敌人的距离，防止堆叠
+            if (newEnemy) {
+              
+                let isValidPosition = true;
+                dataBus.actors.forEach(actor => {
+                    const isSameInstance = actor === newEnemy;
+                    const minDistanceX = actor.width + newEnemy.width;
+                    const minDistanceY = actor.height + newEnemy.height;
+                    if (actor.constructor.name.startsWith('Enemy') && !isSameInstance) {
+                        const actorRect = {
+                            width: actor.width,
+                            height: actor.height
+                        }
+                        const newEnemyRect = {
+                            width: newEnemy.width,
+                            height: newEnemy.height
+                        }
+                        const noCollisionX = actor.x + actorRect.width < newEnemy.x || newEnemy.x + newEnemyRect.width < actor.x;
+                        const noCollisionY = actor.y + actorRect.height < newEnemy.y || newEnemy.y + newEnemyRect.height < actor.y;
+                        if (!noCollisionX && !noCollisionY) {
+                            isValidPosition = false;
+                            console.log('invalid position');
+                            
+                        }
+                    }
+                });
+
+                if (!isValidPosition) {
+                    newEnemy.destroy();
+                }
             }
         }
     }

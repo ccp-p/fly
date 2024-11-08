@@ -17,6 +17,12 @@ export default class Enemy {
     destroy(){
         this.isAlive = false;
     }
+    drawRect(){
+        this.ctx.save();
+        this.ctx.strokeStyle = 'red';
+        this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+        this.ctx.restore();
+    }
     update() {
         this.y += this.speed;
         if (this.y > dataBus.canvas.height) {
@@ -54,5 +60,6 @@ export default class Enemy {
         this.ctx.save();
         this.ctx.drawImage(this.image.img, this.x, this.y);
         this.ctx.restore();
+        this.drawRect();
     }
 }
