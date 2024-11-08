@@ -10,8 +10,8 @@ export default class Bullet {
         this.height = 10; // 子弹的高度
         this.image = dataBus.resources['bullet1.png']; // 子弹的图片资源
         this.type = type; // 子弹的类型
-        this.image =this.type == 1? dataBus.resources['bullet1.png']:dataBus.resources['bullet2.png'];
-        this.isEnemy = this.type == 1 ? true : false; // 是否是敌机的子弹
+        this.image =this.type == 2? dataBus.resources['bullet1.png']:dataBus.resources['bullet2.png'];
+        this.isEnemy = this.type == 2 ? true : false; // 是否是敌机的子弹
         this.isAlive = true; // 子弹是否存活
         this.ctx = dataBus.ctx;
         dataBus.addActor(this);
