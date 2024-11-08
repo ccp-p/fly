@@ -4,11 +4,11 @@ const dataBus = new DataBus();
 export default class Background {
     constructor() {
         
-        this.image =  dataBus.resources['bottom-bar.png'].img
+        this.image =  dataBus.resources['background.png'].img
         console.log('this.image',this.image);
         
-        this.width = dataBus.resources['bottom-bar.png'].img.naturalWidth;
-        this.height = dataBus.resources['bottom-bar.png'].img.naturalHeight;
+        this.width = this.image.naturalWidth;
+        this.height = this.image.naturalHeight;
         this.zIndex = 2;
         // center
 //         步骤分析：
@@ -33,10 +33,10 @@ export default class Background {
         dataBus.addActor(this);
     }
     update(){
-        // this.x -= dataBus.speed
-        // if(this.x <= -this.width){
-        //     this.x = 0;
-        // }
+        this.y -= dataBus.speed
+        if(this.y <= -this.height){
+            this.y = 0;
+        }
     }
 
     render() {
@@ -44,5 +44,7 @@ export default class Background {
         // dataBus.ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
         // dataBus.ctx.drawImage(this.image, this.x + this.width * 2, this.y, this.width, this.height);
         dataBus.ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+        dataBus.ctx.drawImage(this.image, this.x, this.y +this.height, this.width, this.height);
+
     }
 }

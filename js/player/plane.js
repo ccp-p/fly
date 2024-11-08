@@ -10,7 +10,7 @@ export default class Plane {
         this.y = dataBus.canvas.height - this.height -100;
         this.ctx = dataBus.ctx;
         this.isAlive = true;
-        this.zIndex = 1;
+        this.zIndex = 3;
         this.fireInterval = 10; // 发射子弹的间隔帧数
         this.fireCount = 0; // 发射子弹的计数器
         this.bullets = [];
@@ -21,6 +21,24 @@ export default class Plane {
         this.flyCount = 0;
         this.destroyCount = 0;
         dataBus.addActor(this);
+    }
+    borderDetection() {
+        
+        if (this.x <= 0) {
+            this.x = 0;
+        }
+        if (this.x >= dataBus.canvas.width - this.width) {
+            this.x = dataBus.canvas.width - this.width;
+        }
+        if (this.y <= 0) {
+            this.y = 0;
+        }
+        if (this.y >= dataBus.canvas.height - this.height) {
+            this.y = dataBus.canvas.height - this.height;
+        }
+    }
+    bindEvent(){
+
     }
     meDestroy() {
         this.image = dataBus.resources['me_destroy_1.png'];
@@ -58,6 +76,7 @@ export default class Plane {
 
     update() {
         this.meFlyAni();
+        this.borderDetection()
        
 
         if (this.isInvincible) {

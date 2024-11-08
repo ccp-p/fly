@@ -6,6 +6,7 @@ export default class DataBus {
         }
         instance = this
        this.actors = []
+       this.speed =10
     }
     addActor(actor){
         this.actors.push(actor)
