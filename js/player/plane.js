@@ -1,4 +1,5 @@
 import DataBus from '../dataBus.js';
+import Bullet from './bullet.js';
 const dataBus = new DataBus();
 export default class Plane {
 
@@ -74,11 +75,21 @@ export default class Plane {
         }
     }
 
+    fire() {
+        if (this.fireCount >= this.fireInterval) {
+            const bulletX = this.x + this.width / 2 - 2.5; // 子弹从飞机中间发射
+            const bulletY = this.y;
+            const bulletSpeed = 10; // 子弹速度
+            const bullet = new Bullet(bulletX, bulletY, bulletSpeed);
+            this.bullets.push(bullet);
+            this.fireCount = 0; // 重置发射计数器
+        }
+    }
+
     update() {
         this.meFlyAni();
-        this.borderDetection()
+        this.borderDetection();
        
-
         if (this.isInvincible) {
             this.invincibleCount++;
             if (this.invincibleCount >= this.invincibleTime) {
@@ -87,9 +98,7 @@ export default class Plane {
             }
         }
         this.fireCount++;
-        if (this.fireCount >= this.fireInterval) {
-            this.fireCount = 0;
-        }
+        this.fire();
     }
 
     render() {
